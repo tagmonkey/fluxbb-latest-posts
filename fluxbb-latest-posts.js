@@ -49,11 +49,13 @@
 
   function populateFeed (xml_doc) {
     var _entries = xml_doc.getElementsByTagName('entry');
-    var i = _entries.length;
     var _now = new win.Date().getTime();
+    var i = _entries.length;
+    var idx1 = doc.getElementById('idx1');
+    var idx0;
     var _friendly_date;
 
-    doc.getElementById('idx1').insertAdjacentHTML('beforeBegin', '<div id="idx0" class="blocktable"> \
+    idx1.insertAdjacentHTML('beforeBegin', '<div id="idx0" class="blocktable"> \
       <h2> \
         <span>Latest Posts</span></h2> \
         <div class="box"> \
@@ -73,12 +75,13 @@
         </div> \
       </div>');
 
-    doc.getElementById('brdmain').insertBefore(doc.getElementById('idx0'), doc.getElementById('idx1'));
+    idx0 = doc.getElementById('idx0');
+    doc.getElementById('brdmain').insertBefore(idx0, idx1);
 
     while (i--) {
       _friendly_date = getFriendlyDate(_now, _entries[i].getElementsByTagName('updated')[0].textContent);
 
-      doc.getElementById('idx0').querySelector('table > tbody').insertAdjacentHTML('afterBegin', '<tr> \
+      idx0.querySelector('table > tbody').insertAdjacentHTML('afterBegin', '<tr> \
         <td class="tcl"> \
           <div class="icon icon-new"> \
             <div class="nosize">' + (i + 1) + '</div> \
