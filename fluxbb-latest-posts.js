@@ -58,18 +58,18 @@
         <span>Latest Posts</span></h2> \
         <div class="box"> \
           <div class="inbox"> \
-        	  <table> \
-        	  	<thead> \
-        		  	<tr> \
-        				  <th class="tcl" scope="col">Thread</th> \
-        				  <th class="tc2 scope="col"></th> \
-        			  	<th class="tcr" scope="col">Last Post</th> \
-        		  	</tr> \
-        	  	</thead> \
-        	  	<tbody> \
-        	  	</tbody> \
-          	</table> \
-        	</div> \
+            <table> \
+              <thead> \
+                <tr> \
+                  <th class="tcl" scope="col">Thread</th> \
+                  <th class="tc2 scope="col"></th> \
+                  <th class="tcr" scope="col">Last Post</th> \
+                </tr> \
+              </thead> \
+              <tbody> \
+              </tbody> \
+            </table> \
+          </div> \
         </div> \
       </div>');
 
