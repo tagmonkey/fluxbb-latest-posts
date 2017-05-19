@@ -123,7 +123,7 @@
       return _temp + ' minute' + (_temp <= 1 ? '' : 's');
 
     } else if (_seconds < 60) {
-      return _seconds + ' seconds' + (_seconds <= 1 ? '' : 's');
+      return _seconds + ' second' + (_seconds <= 1 ? '' : 's');
     }
   }
 
