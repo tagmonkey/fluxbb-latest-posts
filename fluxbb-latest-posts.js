@@ -113,12 +113,23 @@
   function getFriendlyDate (now, updated) {
     var _seconds = ((now - (new win.Date(updated).getTime())) / 1000) << 0;
     var _temp;
-
-    if (_seconds >= 3600) {
+    if (_seconds > 31449599) {
+      _temp = (_seconds / 60 / 60 / 24 / 7 / 52 << 0);
+      return _temp + ' year' + (_temp <= 1 ? '' : 's');
+      
+    } else if (_seconds > 604799) {
+      _temp = (_seconds / 60 / 60 / 24 / 7 << 0);
+      return _temp + ' week' + (_temp <= 1 ? '' : 's');
+      
+    } else if (_seconds > 86399) {
+      _temp = (_seconds / 60 / 60 / 24 << 0);
+      return _temp + ' day' + (_temp <= 1 ? '' : 's'); 
+   
+    } else if (_seconds > 3599) {
       _temp = (_seconds / 60 / 60 << 0);
       return  _temp + ' hour' + (_temp <= 1 ? '' : 's');
 
-    } else if (_seconds < 3600 && _seconds >= 60) {
+    } else if (_seconds < 3600 && _seconds > 59) {
       _temp = (_seconds / 60 << 0);
       return _temp + ' minute' + (_temp <= 1 ? '' : 's');
 
