@@ -13,7 +13,7 @@
   if ('fetch' in win) {
 
     win.fetch(_url, {
-      "mode": "no-cors"
+      'mode': 'no-cors'
     }).then(function (resp) {
       if (resp.ok) {
         return resp.text().then(function (xml) {
