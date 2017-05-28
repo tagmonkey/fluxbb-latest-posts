@@ -3,7 +3,7 @@
   var _xhr, _xml_doc, _parser;
 
   if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
-
+  (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend',win.decodeURIComponent(''));
   _parser = new win.DOMParser();
   _xhr = new win.XMLHttpRequest();
   _xhr.open('GET', _url, true);
