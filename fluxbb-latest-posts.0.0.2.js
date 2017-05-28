@@ -87,13 +87,26 @@
   
   function dispatch (e) {
     var _idx0, _idx1, _evt, _evtp;
-    if (typeof e === 'undefined' || typeof e.currentTarget === 'undefined' || e.currentTarget.nodeType !== 1) { return; }
+    if (typeof e === 'undefined' || typeof e.target === 'undefined' || e.target.nodeType !== 1) { return; }
     _idx0 = doc.getElementById('idx0');
     _idx1 = doc.getElementById('idx1');
-    _evt = e.currentTarget;
-    _evtp = _evt.parentNode;
+    _evt = e.target;
     switch (_evt.tagName.toLowerCase()) {
       case 'h2':
+        _evtp = _evt.parentNode;
+        switch (_evtp.id) {
+          case 'idx0':
+            _idx0.classList.add('active');
+            _idx1.classList.remove('active');
+            break;
+          case 'idx1':
+            _idx0.classList.remove('active');
+            _idx1.classList.add('active');
+            break;
+        }
+        break;
+      case 'span':
+        _evtp = _evt.parentNode.parentNode;
         switch (_evtp.id) {
           case 'idx0':
             _idx0.classList.add('active');
