@@ -3,7 +3,7 @@
   var _xhr, _xml_doc, _parser;
 
   if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
-  (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend',win.decodeURIComponent('%23brdmain%7Bposition%3Arelative%7D%23idx0%7Bposition%3Aabsolute%3Btop%3A0%3Bleft%3A0%3Bright%3A0%7D%23idx0%2C%23idx1%7B-webkit-pointer-events%3Anone%3Bpointer-events%3Anone%7D%23idx0%3Eh2%2C%23idx1%3Eh2%2C%23idx0%3E.box%2C%23idx1%3E.box%7B-webkit-pointer-events%3Aauto%3Bpointer-events%3Aauto%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7Bopacity%3A.7%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0.active%3Eh2%2C%23idx1.active%3Eh2%7Bopacity%3A1%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3E.box%2C%23idx1%3E.box%7Bdisplay%3Anone%7D%23idx0.active%3E.box%2C%23idx1.active%3E.box%7Bdisplay%3Ablock%7D'));
+  (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend',win.decodeURIComponent('%3Cstyle%20type%3D%22text%2Fcss%22%3E%23brdmain%7Bposition%3Arelative%7D%23idx0%7Bposition%3Aabsolute%3Btop%3A0%3Bleft%3A0%3Bright%3A0%7D%23idx0%2C%23idx1%7B-webkit-pointer-events%3Anone%3Bpointer-events%3Anone%7D%23idx0%3Eh2%2C%23idx1%3Eh2%2C%23idx0%3E.box%2C%23idx1%3E.box%7B-webkit-pointer-events%3Aauto%3Bpointer-events%3Aauto%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7Bopacity%3A.7%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0.active%3Eh2%2C%23idx1.active%3Eh2%7Bopacity%3A1%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3E.box%2C%23idx1%3E.box%7Bdisplay%3Anone%7D%23idx0.active%3E.box%2C%23idx1.active%3E.box%7Bdisplay%3Ablock%7D%3C%2Fstyle%3E'));
   _parser = new win.DOMParser();
   _xhr = new win.XMLHttpRequest();
   _xhr.open('GET', _url, true);
