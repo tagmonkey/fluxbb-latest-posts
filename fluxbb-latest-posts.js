@@ -13,7 +13,6 @@
   _xhr.onreadystatechange = function () {
     if (_xhr.readyState > 3 && _xhr.status >= 200 && _xhr.status < 300) {
       _xml_doc = _parser.parseFromString(_xhr.responseText, 'text/xml');
-
       if (typeof _xml_doc !== 'undefined') { populateFeed(_xml_doc); }
     }
   };
