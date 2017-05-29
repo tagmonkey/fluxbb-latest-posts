@@ -10,10 +10,12 @@
   
   _t_now = _t_cache = (new win.Date().getTime());
   
+  // inject stylesheet -- not strictly necessary, candidate for removal
   (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend', win.decodeURIComponent('%3Cstyle%20type%3D%22text%2Fcss%22%3E%23brdmain%7Bposition%3Arelative%3Bpadding-top%3A' +(doc.getElementById('idx1').clientHeight + 12) + 'px%7D%23idx0%2C%23idx1%7Bposition%3Aabsolute%3Btop%3A0%3Bleft%3A0%3Bright%3A0%7D%23idx0%2C%23idx1%7B-webkit-pointer-events%3Anone%3Bpointer-events%3Anone%7D%23idx0%3E.box%7Bheight%3A' + (doc.querySelector('#idx1>.box').clientHeight + 6) + 'px%3Boverflow%3Aauto%3B-webkit-overflow-scrolling%3Atouch%7D%23idx0%3Eh2%2C%23idx1%3Eh2%2C%23idx0%3E.box%2C%23idx1%3E.box%7B-webkit-pointer-events%3Aauto%3Bpointer-events%3Aauto%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7Bopacity%3A.7%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3Eh2%7Bposition%3Arelative%3Bleft%3A124px%7D%23idx0.active%3Eh2%2C%23idx1.active%3Eh2%7Bopacity%3A1%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3E.box%2C%23idx1%3E.box%7Bdisplay%3Anone%7D%23idx0.active%3E.box%2C%23idx1.active%3E.box%7Bdisplay%3Ablock%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7B-webkit-user-select%3Anone%3B-moz-user-select%3Anone%3Buser-select%3Anone %3Bcursor%3Apointer%7D%3C%2Fstyle%3E'));
   
+  // there must be storage, the cached data itself and a timestamp
   if ('localStorage' in win && !!win.localStorage.getItem('latestPostsCache') && !!win.localStorage.getItem('latestPostsCacheTime')) { 
-    _t_cache = win.localStorage.getItem('latestPostsCacheTime');
+    _t_cache = +(win.localStorage.getItem('latestPostsCacheTime'));
   } 
   
   // if 0, there is no cache; we want to invalidate the cache after 2 minutes, or 120000ms
