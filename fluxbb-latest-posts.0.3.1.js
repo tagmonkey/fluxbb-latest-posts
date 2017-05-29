@@ -1,4 +1,4 @@
-/* fluxbb-latest-posts.js @ 0.2.1 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
+/* fluxbb-latest-posts.js @ 0.3.1 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
 ;(function (win, doc) {
   'use strict';
   
@@ -103,7 +103,7 @@
                   '</a> \
                 </h3> \
                 <div class="forumdesc">' + 
-                  ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?|\/?>|\n|\r)/g, '').substring(0, 69)) + '\u2026' +
+                  ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?.*?\/?>)/g, '').replace(/(\r?\n)/, ' ').substring(0, 69)) + '\u2026' +
                 '</div> \
               </div> \
             </div> \
