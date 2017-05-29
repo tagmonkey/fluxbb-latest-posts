@@ -1,24 +1,39 @@
-/* fluxbb-latest-posts.js @ 0.1.5 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
+/* fluxbb-latest-posts.js @ 0.2.0 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
 ;(function (win, doc) {
-  var _url = win.location.origin + '/extern.php?action=feed&type=atom';
-  var _xhr, _xml_doc, _parser;
-
+  'use strict';
+  
+  var _t_now, _t_cache;
+  
   if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
+  if (!('origin' in win.location)) { win.location.origin = win.location.protocol + '//' + win.location.host; }
   
-  win.addEventListener('load', init, false);
+  _t_now = _t_cache = (new win.Date().getTime());
   
-  function init () {
-    (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend',win.decodeURIComponent('%3Cstyle%20type%3D%22text%2Fcss%22%3E%23brdmain%7Bposition%3Arelative%3Bpadding-top%3A'+(doc.getElementById('idx1').clientHeight + 12)+'px%7D%23idx0%2C%23idx1%7Bposition%3Aabsolute%3Btop%3A0%3Bleft%3A0%3Bright%3A0%7D%23idx0%2C%23idx1%7B-webkit-pointer-events%3Anone%3Bpointer-events%3Anone%7D%23idx0%3E.box%7Bheight%3A'+(doc.querySelector('#idx1>.box').clientHeight + 6)+'px%3Boverflow%3Aauto%3B-webkit-overflow-scrolling%3Atouch%7D%23idx0%3Eh2%2C%23idx1%3Eh2%2C%23idx0%3E.box%2C%23idx1%3E.box%7B-webkit-pointer-events%3Aauto%3Bpointer-events%3Aauto%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7Bopacity%3A.7%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3Eh2%7Bposition%3Arelative%3Bleft%3A124px%7D%23idx0.active%3Eh2%2C%23idx1.active%3Eh2%7Bopacity%3A1%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3E.box%2C%23idx1%3E.box%7Bdisplay%3Anone%7D%23idx0.active%3E.box%2C%23idx1.active%3E.box%7Bdisplay%3Ablock%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7B-webkit-user-select%3Anone%3B-moz-user-select%3Anone%3Buser-select%3Anone %3Bcursor%3Apointer%7D%3C%2Fstyle%3E'));
-    _parser = new win.DOMParser();
-    _xhr = new win.XMLHttpRequest();
+  (doc.head || doc.getElementsByTagName('head')[0]).insertAdjacentHTML('beforeend', win.decodeURIComponent('%3Cstyle%20type%3D%22text%2Fcss%22%3E%23brdmain%7Bposition%3Arelative%3Bpadding-top%3A' +(doc.getElementById('idx1').clientHeight + 12) + 'px%7D%23idx0%2C%23idx1%7Bposition%3Aabsolute%3Btop%3A0%3Bleft%3A0%3Bright%3A0%7D%23idx0%2C%23idx1%7B-webkit-pointer-events%3Anone%3Bpointer-events%3Anone%7D%23idx0%3E.box%7Bheight%3A' + (doc.querySelector('#idx1>.box').clientHeight + 6) + 'px%3Boverflow%3Aauto%3B-webkit-overflow-scrolling%3Atouch%7D%23idx0%3Eh2%2C%23idx1%3Eh2%2C%23idx0%3E.box%2C%23idx1%3E.box%7B-webkit-pointer-events%3Aauto%3Bpointer-events%3Aauto%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7Bopacity%3A.7%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3Eh2%7Bposition%3Arelative%3Bleft%3A124px%7D%23idx0.active%3Eh2%2C%23idx1.active%3Eh2%7Bopacity%3A1%3Btransition%3A.2s%20cubic-bezier(.4%2C0%2C.2%2C1)%20opacity%7D%23idx0%3E.box%2C%23idx1%3E.box%7Bdisplay%3Anone%7D%23idx0.active%3E.box%2C%23idx1.active%3E.box%7Bdisplay%3Ablock%7D%23idx0%3Eh2%2C%23idx1%3Eh2%7B-webkit-user-select%3Anone%3B-moz-user-select%3Anone%3Buser-select%3Anone %3Bcursor%3Apointer%7D%3C%2Fstyle%3E'));
+  
+  if ('localStorage' in win && !!win.localStorage.getItem('latestPostsCache') && !!win.localStorage.getItem('latestPostsCacheTime')) { 
+    _t_cache = win.localStorage.getItem('latestPostsCacheTime');
+  } 
+  
+  if ((_t_now - _t_cache > 0) && (_t_now - _t_cache < 3e5)) {
+    win.addEventListener('load', retrieveCachedData, false);
+  } else {
+    win.addEventListener('load', retrieveData, false);
+  }
+  
+  function retrieveData () {
+    var _url = win.location.origin + '/extern.php?action=feed&type=atom'; 
+    var _xhr = new win.XMLHttpRequest();
+    
     _xhr.open('GET', _url, true);
-  
+    
     if ('responseType' in _xhr) { _xhr.responseType = 'text'; }
-  
+    
     _xhr.onreadystatechange = function () {
-      if (_xhr.readyState > 3 && _xhr.status >= 200 && _xhr.status < 300) {
-        _xml_doc = _parser.parseFromString(_xhr.responseText, 'text/xml');
-        if (typeof _xml_doc !== 'undefined') { populateFeed(_xml_doc); }
+      if (_xhr.readyState > 3 && _xhr.status > 199 && _xhr.status < 300) {
+        win.localStorage.setItem('latestPostsCache', win.encodeURIComponent(_xhr.responseText));
+        win.localStorage.setItem('latestPostsCacheTime', (new win.Date().getTime()));
+        populateFeed(_xhr.responseText);
       }
     };
     _xhr.ontimeout = _xhr.onerror = _xhr.onabort = function (e) {
@@ -28,9 +43,14 @@
     _xhr.send(null);
   }
   
-  function populateFeed (xml_doc) {
-    var _entries = xml_doc.getElementsByTagName('entry');
-    var _now = new win.Date().getTime();
+  function retrieveCachedData () {
+    return populateFeed(win.decodeURIComponent(win.localStorage.getItem('latestPostsCache')));
+  }
+  
+  function populateFeed (markup) {
+    var _parser = new win.DOMParser();
+    var _xml_doc = _parser.parseFromString(markup, 'text/xml');
+    var _entries = _xml_doc.getElementsByTagName('entry');
     var _i = _entries.length;
     var _idx1 = doc.getElementById('idx1');
     var _idx0;
@@ -63,7 +83,7 @@
     doc.getElementById('brdmain').insertBefore(_idx0, _idx1);
 
     while (_i--) {
-      _friendly_date = getFriendlyDate(_now, _entries[_i].getElementsByTagName('updated')[0].textContent);
+      _friendly_date = getFriendlyDate(_t_now, _entries[_i].getElementsByTagName('updated')[0].textContent);
 
       _idx0.querySelector('table > tbody').insertAdjacentHTML('afterBegin', 
         '<tr> \
