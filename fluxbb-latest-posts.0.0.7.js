@@ -69,7 +69,7 @@
                 '</a> \
               </h3> \
               <div class="forumdesc">' +
-                ((sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent)).substring(0,64).replace(/<\w+>/,'').replace(/<\w+>|<\/\w+>/g,' ')) +
+                ((sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent)).substring(0,56).replace(/<\w+>/,'').replace(/<\w+>|<\/\w+>/g,' ')) + '\u2026' +
               '</div> \
             </div> \
           </div> \
