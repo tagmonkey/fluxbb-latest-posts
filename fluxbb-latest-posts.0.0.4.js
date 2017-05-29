@@ -82,7 +82,11 @@
         </td> \
       </tr>');
     }
-    win.addEventListener('click', dispatch, false);
+    if ('ontouchstart' in win) {
+      win.addEventListener('touchstart', dispatch, false);
+    } else {
+      win.addEventListener('click', dispatch, false);
+    }
   }
   
   function dispatch (e) {
