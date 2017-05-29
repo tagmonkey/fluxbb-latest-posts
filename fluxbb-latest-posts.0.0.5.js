@@ -68,6 +68,9 @@
                   _entries[_i].getElementsByTagName('title')[0].textContent +
                 '</a> \
               </h3> \
+              <div class="forumdesc">' +
+                sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent) +
+              '</div> \
             </div> \
           </div> \
         </td> \
@@ -123,6 +126,12 @@
         }
         break;
     }
+  }
+  
+  function sanitize (text) {
+    return text.split('').map(function (char) {
+      return char === '<' ? '&lt;' : char === '>' ? '&gt;' : char
+    ;}).join('');
   }
 
   function getFriendlyDate (now, updated) {
