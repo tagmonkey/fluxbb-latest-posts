@@ -68,9 +68,8 @@
                   _entries[_i].getElementsByTagName('title')[0].textContent +
                 '</a> \
               </h3> \
-              <div class="forumdesc">' +
-                ((_entries[_i].getElementsByTagName('summary')[0].textContent).substring(0,56).replace(/<\w+>/,'').replace(/<\w+>|<\/\w+>/g,' ')) + '\u2026' +
-              '</div> \
+              <div class="forumdesc"> \
+              </div> \
             </div> \
           </div> \
         </td> \
