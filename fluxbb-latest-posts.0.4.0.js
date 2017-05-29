@@ -1,4 +1,4 @@
-/* fluxbb-latest-posts.js @ 0.3.1 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
+/* fluxbb-latest-posts.js @ 0.4.0 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
 ;(function (win, doc) {
   'use strict';
   
