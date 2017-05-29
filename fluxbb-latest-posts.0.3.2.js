@@ -103,7 +103,7 @@
                   '</a> \
                 </h3> \
                 <div class="forumdesc">' + 
-                  ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?.*?\/?>)/g, '').replace(/(\r?\n)/, ' ').substring(0, 69)) + '\u2026' +
+                  '\u201c' + ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?.*?\/?>)/g, '').replace(/(\r?\n)/, ' ').substring(0, 69)) + '\u2026\u201d' +
                 '</div> \
               </div> \
             </div> \
