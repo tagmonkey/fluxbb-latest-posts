@@ -1,4 +1,4 @@
-/* fluxbb-latest-posts.js @ 0.1.3 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
+/* fluxbb-latest-posts.js @ 0.1.4 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
 ;(function (win, doc) {
   var _url = 'https://robomonkey.org/extern.php?action=feed&type=atom';
   var _xhr, _xml_doc, _parser;
@@ -31,9 +31,11 @@
     var _idx0;
     var _friendly_date;
 
-    _idx1.insertAdjacentHTML('beforeBegin', '<div id="idx0" class="blocktable"> \
-      <h2> \
-        <span>Latest Posts</span></h2> \
+    _idx1.insertAdjacentHTML('beforeBegin', 
+      '<div id="idx0" class="blocktable"> \
+        <h2> \
+          <span>Latest Posts</span> \
+        </h2> \
         <div class="box"> \
           <div class="inbox"> \
             <table> \
@@ -50,41 +52,42 @@
           </div> \
         </div> \
       </div>');
-
+    _idx1.classList.remove('latest-not-ready');
     _idx0 = doc.getElementById('idx0');
     doc.getElementById('brdmain').insertBefore(_idx0, _idx1);
 
     while (_i--) {
       _friendly_date = getFriendlyDate(_now, _entries[_i].getElementsByTagName('updated')[0].textContent);
 
-      _idx0.querySelector('table > tbody').insertAdjacentHTML('afterBegin', '<tr> \
-        <td class="tcl"> \
-          <div class="icon icon-new"> \
-            <div class="nosize">' + (_i + 1) + '</div> \
-          </div> \
-          <div class="tclcon"> \
-            <div> \
-              <h3> \
-                <a href="' + _entries[_i].getElementsByTagName('id')[0].textContent + '">' +
-                  _entries[_i].getElementsByTagName('title')[0].textContent +
-                '</a> \
-              </h3> \
-              <div class="forumdesc">' +
-                '\u2026' +
-              '</div> \
+      _idx0.querySelector('table > tbody').insertAdjacentHTML('afterBegin', 
+        '<tr> \
+          <td class="tcl"> \
+            <div class="icon icon-new"> \
+              <div class="nosize">' + (_i + 1) + '</div> \
             </div> \
-          </div> \
-        </td> \
-        <td class="tc2"></td> \
-        <td class="tcr"> \
-          <a href="' + _entries[_i].getElementsByTagName('id')[0].textContent + '">' +
-            _friendly_date +
-          ' ago</a> \
-          <span class="byuser">by ' +
-            _entries[_i].getElementsByTagName('author')[0].getElementsByTagName('name')[0].textContent +
-          '</span> \
-        </td> \
-      </tr>');
+            <div class="tclcon"> \
+              <div> \
+                <h3> \
+                  <a href="' + _entries[_i].getElementsByTagName('id')[0].textContent + '">' +
+                    _entries[_i].getElementsByTagName('title')[0].textContent +
+                  '</a> \
+                </h3> \
+                <div class="forumdesc">' +
+                  '\u2026' +
+                '</div> \
+              </div> \
+            </div> \
+          </td> \
+          <td class="tc2"></td> \
+          <td class="tcr"> \
+            <a href="' + _entries[_i].getElementsByTagName('id')[0].textContent + '">' +
+              _friendly_date +
+            ' ago</a> \
+            <span class="byuser">by ' +
+              _entries[_i].getElementsByTagName('author')[0].getElementsByTagName('name')[0].textContent +
+            '</span> \
+          </td> \
+        </tr>');
     }
     if ('ontouchstart' in win) {
       win.addEventListener('touchstart', dispatch, false);
