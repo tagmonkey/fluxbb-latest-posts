@@ -69,7 +69,7 @@
                 '</a> \
               </h3> \
               <div class="forumdesc">' +
-                sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent) +
+                ((sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent)).substring(0,64).replace(/<\w+>/,'').replace(/<\w+>|<\/\w+>/g,' ')) +
               '</div> \
             </div> \
           </div> \
