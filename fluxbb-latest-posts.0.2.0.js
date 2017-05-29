@@ -4,6 +4,7 @@
   
   var _t_now, _t_cache;
   
+  // minimum requirements
   if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
   if (!('origin' in win.location)) { win.location.origin = win.location.protocol + '//' + win.location.host; }
   
@@ -15,7 +16,8 @@
     _t_cache = win.localStorage.getItem('latestPostsCacheTime');
   } 
   
-  if ((_t_now - _t_cache > 0) && (_t_now - _t_cache < 3e5)) {
+  // if 0, there is no cache; we want to invalidate the cache after 2 minutes, or 120000ms
+  if ((_t_now - _t_cache > 0) && (_t_now - _t_cache < 12e4)) {
     win.addEventListener('load', retrieveCachedData, false);
   } else {
     win.addEventListener('load', retrieveData, false);
@@ -155,12 +157,6 @@
         }
         break;
     }
-  }
-  
-  function sanitize (text) {
-    return text.split('').map(function (char) {
-      return char === '<' ? '&lt;' : char === '>' ? '&gt;' : char
-    ;}).join('');
   }
 
   function getFriendlyDate (now, updated) {
