@@ -1,6 +1,6 @@
 /* fluxbb-latest-posts.js @ 0.1.5 :: BSD-3-Clause-Clear :: https://github.com/tagmonkey/fluxbb-latest-posts/ */
 ;(function (win, doc) {
-  var _url = 'https://robomonkey.org/extern.php?action=feed&type=atom';
+  var _url = win.location.origin + '/extern.php?action=feed&type=atom';
   var _xhr, _xml_doc, _parser;
 
   if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
