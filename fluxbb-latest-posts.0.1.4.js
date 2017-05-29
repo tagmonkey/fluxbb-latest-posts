@@ -52,6 +52,7 @@
           </div> \
         </div> \
       </div>');
+    
     _idx1.classList.remove('latest-not-ready');
     _idx0 = doc.getElementById('idx0');
     doc.getElementById('brdmain').insertBefore(_idx0, _idx1);
