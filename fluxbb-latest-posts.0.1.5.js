@@ -79,9 +79,8 @@
                     _entries[_i].getElementsByTagName('title')[0].textContent +
                   '</a> \
                 </h3> \
-                <div class="forumdesc">' +
-                  '\u2026' +
-                '</div> \
+                <div class="forumdesc"> \u2026 \
+                </div> \
               </div> \
             </div> \
           </td> \
