@@ -102,8 +102,9 @@
                     _entries[_i].getElementsByTagName('title')[0].textContent +
                   '</a> \
                 </h3> \
-                <div class="forumdesc"> \u2026 \
-                </div> \
+                <div class="forumdesc">' + 
+                  ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?|\/?>|\n|\r)/g, '').substring(0, 69)) + '\u2026' +
+                '</div> \
               </div> \
             </div> \
           </td> \
