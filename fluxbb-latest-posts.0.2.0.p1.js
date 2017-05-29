@@ -5,7 +5,7 @@
   var _t_now, _t_cache;
   
   // minimum requirements
-  if (!('DOMParser' in win) || !('XMLHttpRequest' in win)) { return; }
+  if (!('DOMParser' in win) || !('classList' in doc.documentElement) || !('XMLHttpRequest' in win)) { return; }
   if (!('origin' in win.location)) { win.location.origin = win.location.protocol + '//' + win.location.host; }
   
   _t_now = _t_cache = (new win.Date().getTime());
@@ -82,9 +82,9 @@
         </div> \
       </div>');
     
-    _idx1.classList.remove('latest-not-ready');
     _idx0 = doc.getElementById('idx0');
     doc.getElementById('brdmain').insertBefore(_idx0, _idx1);
+    _idx1.classList.remove('latest-not-ready');
 
     while (_i--) {
       _friendly_date = getFriendlyDate(_t_now, _entries[_i].getElementsByTagName('updated')[0].textContent);
@@ -118,6 +118,7 @@
           </td> \
         </tr>');
     }
+    
     if ('ontouchstart' in win) {
       win.addEventListener('touchstart', dispatch, false);
     } else {
