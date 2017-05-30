@@ -103,7 +103,7 @@
                   '</a> \
                 </h3> \
                 <div class="forumdesc">' + 
-                  '\u201c' + ((_parser.parseFromString(_entries[_i].getElementsByTagName('summary')[0].textContent, 'text/html')).documentElement.textContent.replace(/(<\/?.*?\/?>)/, '').replace(/(<\/?.*?\/?>)/g, ' ').substring(0, 69)) + '\u2026\u201d' +
+                  '\u201c' + (sanitize(_entries[_i].getElementsByTagName('summary')[0].textContent, _parser)) + '\u2026\u201d' +
                 '</div> \
               </div> \
             </div> \
@@ -161,6 +161,10 @@
         }
         break;
     }
+  }
+  
+  function sanitize (markup, parser) {
+    return ((parser.parseFromString(markup, 'text/html')).documentElement.textContent).replace(/(<\/?.*?\/?>)/g, '').substring(0, 69);
   }
 
   function getFriendlyDate (now, updated) {
